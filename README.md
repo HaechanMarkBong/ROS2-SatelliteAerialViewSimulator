@@ -9,7 +9,7 @@ See it in use here: https://github.com/ricardodeazambuja/ros2_open_voc_landing_h
 
 `$ colcon build --symlink-install --packages-select ros2_satellite_aerial_view_simulator`
 
-`$ setup install/setup.bash`
+`$ source install/setup.bash`
 
 `$ ros2 launch ros2_satellite_aerial_view_simulator aerialview.launch.py`
 
