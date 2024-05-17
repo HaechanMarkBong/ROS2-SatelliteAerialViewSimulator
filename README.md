@@ -4,7 +4,7 @@ ROS 2 wrapper node for https://github.com/ricardodeazambuja/AerialViewGenerator
 See it in use here: https://github.com/ricardodeazambuja/ros2_open_voc_landing_heatmap
 
 ## TL;DR;
-`$ git clone https://github.com/ricardodeazambuja/ros2_satellite_aerial_view_simulator.git`
+`$ git clone https://github.com/HaechanMarkBong/ROS2-SatelliteAerialViewSimulator.git`
 
 
 `$ colcon build --symlink-install --packages-select ros2_satellite_aerial_view_simulator`
