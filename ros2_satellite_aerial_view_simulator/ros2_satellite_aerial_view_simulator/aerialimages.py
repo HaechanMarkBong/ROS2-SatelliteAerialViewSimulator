@@ -16,8 +16,8 @@ from cv_bridge import CvBridge
 from tf2_ros import TransformBroadcaster
 
 
-from aerialviewgenerator.aerialview import AerialView
-from aerialviewgenerator.uavphysics import UAVPhysics
+#from aerialviewgenerator.aerialview import AerialView
+#from aerialviewgenerator.uavphysics import UAVPhysics
 
 class AerialImagesPublisher(Node):
     def __init__(self):
@@ -98,8 +98,8 @@ class AerialImagesPublisher(Node):
             self.declare_parameter(k, v)
             ctrl_params[k] = self.get_parameter(k).value
         
-        self.avg = AerialView(zoom=20, baseurl=baseurl)
-        self.uav = UAVPhysics(z0=z_init, ctrlType="xyz_vel", ctrlParams=ctrl_params)
+        #self.avg = AerialView(zoom=20, baseurl=baseurl)
+        #self.uav = UAVPhysics(z0=z_init, ctrlType="xyz_vel", ctrlParams=ctrl_params)
         self.twist_linear = [0.0,0.0,0.0]
         self.currPos = [0.0,0.0,z_init]
         self.currLatLon = [lat0, lon0]
@@ -124,16 +124,16 @@ class AerialImagesPublisher(Node):
  
 
     def on_img_timer(self):
-        nextPos = np.asarray(self.uav.update([0]*3, self.twist_linear, self.delta_t))
+        nextPos = self.currPos + self.twist_linear #np.asarray(self.uav.update([0]*3, self.twist_linear, self.delta_t))
         diffPos = nextPos - self.currPos
         self.currPos = nextPos
         bearing = math.degrees(math.atan2(-diffPos[1],diffPos[0]))+90
         distance = np.linalg.norm(diffPos[:2]) # relative distance
 
-        lat, lon = self.avg.getPointAtDistance(self.currLatLon[0], self.currLatLon[1], distance, bearing)
+        lat, lon = lat0, lon0 #self.avg.getPointAtDistance(self.currLatLon[0], self.currLatLon[1], distance, bearing)
         self.currLatLon = [lat, lon]
 
-        img = self.avg.getAerialImage(self.currLatLon[0], self.currLatLon[1], self.bearing, self.currPos[2], self.fov, output_size=self.output_img_size)
+        img =  #self.avg.getAerialImage(self.currLatLon[0], self.currLatLon[1], self.bearing, self.currPos[2], self.fov, output_size=self.output_img_size)
 
         img_np = np.asarray(img.convert('RGB'))
 
